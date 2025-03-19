@@ -12,6 +12,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Install Chrome for Karma tests
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+          echo "CHROME_BIN=$(which google-chrome)" >> $GITHUB_ENV
+
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -20,12 +26,6 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-
-      - name: Install Chrome for Karma tests
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          echo "CHROME_BIN=$(which google-chrome)" >> $GITHUB_ENV
 
       - name: Build and test
         uses: docker/build-push-action@v6
