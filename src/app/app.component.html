@@ -1,2 +1,70 @@
-<h1>this is ahmed reda from Dcodz</h1>
-<h2>I am software engineer</h2>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ahmed Reda | Dcodz</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: white;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      h1,
+      h2,
+      h3 {
+        opacity: 0;
+        animation: fadeIn 1.5s forwards ease-out;
+      }
+
+      h1 {
+        animation-delay: 0.5s;
+        font-size: 3em;
+      }
+      h2 {
+        animation-delay: 1.5s;
+        font-size: 2em;
+      }
+      h3 {
+        animation-delay: 2.5s;
+        font-size: 1.5em;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      h3::after {
+        content: "|";
+        display: inline-block;
+        animation: typing 3s steps(30) infinite, blink 0.6s step-end infinite;
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>This is Ahmed Reda from Dcodz</h1>
+    <h2>I am a Software Engineer</h2>
+    <h3>This update should fetch with DockerHub automatically</h3>
+  </body>
+</html>
