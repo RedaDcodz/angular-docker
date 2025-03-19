@@ -16,8 +16,23 @@ COPY . .
 # Build the Angular app for production
 RUN npm run build --prod
 
-# Stage 2: Serve the app with Nginx
-FROM nginx:alpine
+# Stage 2: Run unit tests (test stage)
+FROM node:16 AS test
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the app files and dependencies from the build stage
+COPY --from=build /app /app
+
+# Install testing dependencies (Jest, Karma, etc.)
+RUN npm install --only=dev
+
+# Run the tests (e.g., with Karma or Jest)
+RUN npm test
+
+# Stage 3: Serve the app with Nginx (prod stage)
+FROM nginx:alpine AS prod
 
 # Copy the built app from the build container to Nginx
 COPY --from=build /app/dist/my-angular-app /usr/share/nginx/html
