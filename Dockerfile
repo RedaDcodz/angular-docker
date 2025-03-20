@@ -1,5 +1,5 @@
-# Stage 1: Build the Angular app
-FROM node:16 AS build
+# Stage 1: Development environment
+FROM node:16 AS dev
 
 WORKDIR /app
 
@@ -11,14 +11,9 @@ RUN npm install
 # Copy the rest of the app files
 COPY . .
 
-# Build the Angular app for production
-RUN npm run build --prod
+# Expose Angular development server port
+EXPOSE 4200
 
-# Stage 2: Serve the app with Nginx (prod stage)
-FROM nginx:alpine AS prod
+# Start the Angular app in development mode
+CMD ["npm", "start", "--", "--host", "0.0.0.0", "--poll", "2000"]
 
-COPY --from=build /app/dist/my-angular-app /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
